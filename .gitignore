@@ -1,0 +1,4 @@
+austinLearning.py
+*.psd
+venv/
+node_modules/
