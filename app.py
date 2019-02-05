@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import pymongo
 from eBayAPIPoller import eBaySearch
+import os
 
 #templates are for html
 #static folder is for js files
