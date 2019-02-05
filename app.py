@@ -6,6 +6,7 @@ from eBayAPIPoller import eBaySearch
 #static folder is for js files
 app = Flask(__name__, static_folder="./", template_folder="./")
 
+port = int(os.environ.get('PORT', 5000))
 #for connecting to localhost
 #client = pymongo.MongoClient("mongodb://%s:%s@localhost:27017/"% ("AustinAdmin", "test"))
 
