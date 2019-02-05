@@ -13,6 +13,7 @@ client = pymongo.MongoClient("mongodb://%s:%s@ds057862.mlab.com:57862/dealalertd
 
 #localhost version
 #mydb = client["eBaySearchData"]
+#test
 mydb = client["dealalertdb"] 
 
 @app.route("/")
