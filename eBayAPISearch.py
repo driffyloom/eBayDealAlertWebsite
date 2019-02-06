@@ -6,7 +6,7 @@ import pymongo
 class eBaySearch:
 
     def __init__(self, appID):
-        self.api = Finding(domain='svcs.sandbox.ebay.com',
+        self.api = Finding(domain='svcs.ebay.com',
               appid = appID,
               config_file=None)
         

@@ -28,22 +28,6 @@
         {% endfor %}
       </table>
 
-      <nav aria-label="...">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" action="/searchResults"  tabindex="-1">Previous</a>
-            </li>
-
-            <li class="page-item"><a class="page-link" href="{{ url_for('searchResults',page = 1) }}" method="POST">1</a></li>
-            <li class="page-item"><a class="page-link" href="{{ url_for('searchResults', page = 2) }}" method="POST">2</a></li>
-            <li class="page-item"><a class="page-link" href="{{ url_for('searchResults', page = 3) }}" method="POST">3</a></li>
-
-            <li class="page-item">
-              <a class="page-link" action="/searchResults" >Next</a>
-            </li>
-          </ul>
-        </nav>
-
         
       <script src="/dist/app.js" type = "text/javascript" src="{{url_for('static', filename='app.js')}}"></script>
   </html>
