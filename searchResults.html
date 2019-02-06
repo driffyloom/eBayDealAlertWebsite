@@ -4,14 +4,25 @@
       <meta charset="utf-8">
       <!-- Latest compiled and minified bootstrap CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+      <link type="text/css" rel="stylesheet" href="/table.css">
     </head>
       <table class = "table">
-        <p>Search Results</p>
+        <h1>Search Results</h1>
+        <thead>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Condition</th>
+            <th>URL</th>
+        </thead>
         {% for item in data %}
         <tr>
+          <th><img src="{{item.image}}" alt="No Item Image"></th>
           <th>{{item.title}}</th>
           <th>{{item.category}}</th>
           <th>{{item.price}}</th>
+          <th>{{item.condition}}</th>
           <th><a href="{{item.url}}">{{item.url}}</a></th>
         </tr>
         {% endfor %}
@@ -20,7 +31,7 @@
       <nav aria-label="...">
           <ul class="pagination">
             <li class="page-item">
-              <a class="page-link" action="/searchResults/1"  tabindex="-1">Previous</a>
+              <a class="page-link" action="/searchResults"  tabindex="-1">Previous</a>
             </li>
 
             <li class="page-item"><a class="page-link" href="{{ url_for('searchResults',page = 1) }}" method="POST">1</a></li>
@@ -28,10 +39,11 @@
             <li class="page-item"><a class="page-link" href="{{ url_for('searchResults', page = 3) }}" method="POST">3</a></li>
 
             <li class="page-item">
-              <a class="page-link" action="/searchResults/3" >Next</a>
+              <a class="page-link" action="/searchResults" >Next</a>
             </li>
           </ul>
         </nav>
 
+        
       <script src="/dist/app.js" type = "text/javascript" src="{{url_for('static', filename='app.js')}}"></script>
   </html>

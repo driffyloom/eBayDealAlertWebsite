@@ -4,16 +4,30 @@
     <meta charset="utf-8">
     <!-- Latest compiled and minified bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="./index.css">
   </head>
   <body>
-    <div>
-      <form action="/searchResults/1" method="POST">
+    <div id = "searchBox1" class = "searchBox">
+      <h1>Quick Search?</h1>
+      <form action="/searchResults" method="PUT">
           <div class="form-group">
-              <label for="exampleInputEmail1">Search</label>
+              <label for="exampleInputEmail">Search</label>
               <input  class="form-control" name="searchBar" placeholder="Search Here"></input>
               <input  class="form-control" name="priceLimit" placeholder="Price Limit"></input>
               <button type="submit" class="btn btn-primary"> Submit</button>
           </div>
+      </form>
+    </div>
+
+    <div id = "searchBox2" class = "searchBox">
+      <h1>Or Set up an eBay Deal Alert?</h1>
+      <form action="/setPreferences" method="PUT">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Search</label>
+            <input  class="form-control" name="searchBar" placeholder="Search Here"></input>
+            <input  class="form-control" name="priceLimit" placeholder="Price Limit"></input>
+            <button type="submit" class="btn btn-primary"> Submit</button>
+        </div>
       </form>
     </div>
   </body>

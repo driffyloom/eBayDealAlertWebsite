@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <!-- Latest compiled and minified bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+      <link rel="text/css" href="/table.css">
+    </head>
+    <body>
+        <h1>Select which items best matches what you are looking for!</h1>
+        <table class = "table">
+            <thead>
+                <th>Choose Item</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Condition</th>
+                <th>URL</th>
+            </thead>
+            
+            {% for item in bestMatches %}
+            <tr >
+                <th><input type="checkbox" id = "box" name = "chosen" value="matches" style="margin:auto;"></th>
+                <th><img src="{{item.image}}" alt="No Item Image"></th>
+                <th name = "title">{{item.title}}</th>
+                <th name = "category">{{item.category}}</th>
+                <th name = "price">{{item.price}}</th>
+                <th name = "condition">{{item.condition}}</th>
+                <th><a href="{{item.url}}">{{item.url}}</a></th>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <form action="/notifyComplete" method="POST">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Enter your Username and Email!</label>
+                <input  class="form-control" name="username" placeholder="Username"></input>
+                <input  class="form-control" name="email" placeholder="Email"></input>
+                <button type="submit" class="btn btn-primary"> Submit</button>
+            </div>
+        </form>
+
+      </body>
+      <script src="/dist/app.js" type = "text/javascript" src="{{url_for('static', filename='app.js')}}"></script>
+  </html>
