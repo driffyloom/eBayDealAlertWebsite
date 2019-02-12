@@ -6,7 +6,7 @@ import os
 
 #templates are for html
 #static folder is for js files
-app = Flask(__name__, static_folder="./", template_folder="./")
+app = Flask(__name__, static_folder="./static", template_folder="./templates")
 
 port = int(os.environ.get('PORT', 5000))
 #for connecting to localhost
