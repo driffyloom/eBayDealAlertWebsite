@@ -39,7 +39,7 @@ class eBaySearch:
         response = self.api.execute('findItemsAdvanced',api_request)
         soup = BeautifulSoup(response.content, 'lxml')
         items = soup.find_all('item')
-        return items;
+        return items
 
     def printSearchResults(self,items):
         
@@ -67,7 +67,7 @@ class eBaySearch:
 
             input()
 
-    def findBestMatch(self,items, search, priceLimit):
+    def findBestMatch(self, items, search, priceLimit):
 
         numCategories = 0
         numItems = 0
@@ -75,6 +75,7 @@ class eBaySearch:
         diffCategoryItems = []
 
         mydb = self.myclient["dealalertdb"]
+        tempPref = mydb["tempPreferences"]
 
         for item in items:
             collectionDict = {}
@@ -95,18 +96,14 @@ class eBaySearch:
             
             if(numCategories <= 10 or numItems <= 10):
                 collectionDict = {"searchQuery": search,"title":title, "image": image, "url":url,  "price":price,
-                "priceLimit":priceLimit,"category":cat, "condition":condition,}
-                 
+                "priceLimit":priceLimit,"category":cat, "condition":condition,"numItem":numItems}
                 diffCategoryItems.append(collectionDict)
                 numCategories += 1
                 numItems += 1
-
             if(numItems == 10):
                 break
-            tempPref = mydb["tempPreferences"]
 
         tempPref.insert_many(diffCategoryItems)
-
         return diffCategoryItems
 
     def addPrefItemsToDB(self,username,email,prefArray):
@@ -120,7 +117,8 @@ class eBaySearch:
         count = 0
 
         for item in tempPref.find():
-            if(count in prefArray):
+            
+            if(item["numItem"] in prefArray):
                 if(item["category"] not in prefCat):
                     prefCat.append(item["category"])
                 if(item["condition"] not in prefCon):
@@ -132,7 +130,7 @@ class eBaySearch:
         userPreferences.insert_one({"username": username, "email":email, "searchQuery": searchQuery, "priceLimit": priceLimit,
         "prefCat": prefCat, "prefCon": prefCon })
 
-        mydb["tempPreferences"].drop()
+        
 
     def addResultsToDB(self,items):
         #localhost version
@@ -173,3 +171,6 @@ class eBaySearch:
 
 
 
+test = eBaySearch("AustinCh-DealAler-PRD-63939d325-5fa4cbe2")
+test.findBestMatch(test.search("iphone","50"),"iphone","50")
+test.addPrefItemsToDB("test","pest",[0,1,3])

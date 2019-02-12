@@ -6,7 +6,7 @@ import os
 
 #templates are for html
 #static folder is for js files
-app = Flask(__name__, static_folder="./", template_folder="./")
+app = Flask(__name__, static_folder="./static", template_folder="./templates")
 
 port = int(os.environ.get('PORT', 5000))
 #for connecting to localhost
@@ -31,24 +31,17 @@ def setPreferences():
     eBayAPIPoller = eBaySearch("AustinCh-DealAler-PRD-63939d325-5fa4cbe2")
     bestMatches = eBayAPIPoller.findBestMatch(eBayAPIPoller.search(search,priceLimit),search,priceLimit)
     return  render_template("setPreferences.html",bestMatches = bestMatches)
-    
+
 @app.route('/notifyComplete', methods = ["GET", "POST"])
 def addPreferencesToDB():
-
-    username = request.form['username']
-    email = request.form['email']
-    prefArray = [1,2,3]
-    chosen = request.form.getlist("chosen[]")
-    print(chosen)
-
-    count = 0
-    for checkBox in request.form.getlist("chosen"):
-        if checkBox == 'matches':
-            print(count)
-            count+=1
-    eBayAPIPoller = eBaySearch("AustinCh-DealAler-PRD-63939d325-5fa4cbe2")
-    eBayAPIPoller.addPrefItemsToDB(username,email,prefArray)
-    return  render_template("dealAlertCompletion.html")
+    if(request.method == "POST"):
+        username = request.form['username']
+        email = request.form['email']
+        prefArray = [int(i) for i in request.form.getlist("chosen")]
+        eBayAPIPoller = eBaySearch("AustinCh-DealAler-PRD-63939d325-5fa4cbe2")
+        eBayAPIPoller.addPrefItemsToDB(username,email,prefArray)
+        mydb["tempPreferences"].drop()
+        return  render_template("dealAlertCompletion.html")
 
 @app.route('/searchResults' , methods = ["GET"])
 def searchResults():
