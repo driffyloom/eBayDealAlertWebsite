@@ -4,34 +4,39 @@
     <meta charset="utf-8">
     <!-- Latest compiled and minified bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="./index.css">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <title>Ebay Deal Alert</title>
   </head>
-  <body style="text-align:center;">
-    <h1 style="margin-top:5%;">Ebay Deal Alert</h1>
-    <h2 style="margin-bottom:5%;">Still a work in progress. Only accepts 1 word queries with prices</h2>
-    <div id = "searchBox1" class = "searchBox">
-      <h1>Quick Search?</h1>
-      <form action="/searchResults" method="PUT">
+  <body>
+    <div id = "logo">
+      <h1 id= "title">Ebay Deal Alert</h1>
+      <h2 >Still a work in progress. Only accepts 1 word queries with prices</h2>
+    </div>
+
+    <div id = "options">
+      <div class = "searchBox">
+        <h1>Quick Search?</h1>
+        <form action="/searchResults" method="PUT">
+            <div class="form-group">
+                <label for="exampleInputEmail">Search</label>
+                <input  class="form-control" name="searchBar" placeholder="Search Here"></input>
+                <input  class="form-control" name="priceLimit" placeholder="Price Limit"></input>
+                <button type="submit" class="btn btn-primary"> Submit</button>
+            </div>
+        </form>
+      </div>
+
+      <div class = "searchBox">
+        <h1>Or Set up an eBay Deal Alert?</h1>
+        <form action="/setPreferences" method="PUT">
           <div class="form-group">
-              <label for="exampleInputEmail">Search</label>
+              <label for="exampleInputEmail1">Search</label>
               <input  class="form-control" name="searchBar" placeholder="Search Here"></input>
               <input  class="form-control" name="priceLimit" placeholder="Price Limit"></input>
               <button type="submit" class="btn btn-primary"> Submit</button>
           </div>
-      </form>
-    </div>
-
-    <div id = "searchBox2" class = "searchBox">
-      <h1>Or Set up an eBay Deal Alert?</h1>
-      <form action="/setPreferences" method="PUT">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Search</label>
-            <input  class="form-control" name="searchBar" placeholder="Search Here"></input>
-            <input  class="form-control" name="priceLimit" placeholder="Price Limit"></input>
-            <button type="submit" class="btn btn-primary"> Submit</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </body>
 
